@@ -1,0 +1,19 @@
+import { ArrowRight, BookOpen, CalendarDays, ChartNoAxesCombined, GraduationCap, ListTodo, ShieldCheck, Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
+const features = [
+  { icon: BookOpen, title: 'Disciplinas organizadas', text: 'Reúna suas matérias e acompanhe cada área de estudo.' },
+  { icon: ListTodo, title: 'Tarefas e atividades', text: 'Registre atividades, defina prioridades e acompanhe o que concluiu.' },
+  { icon: CalendarDays, title: 'Calendário de estudos', text: 'Visualize provas, compromissos e prazos em um só lugar.' },
+  { icon: ChartNoAxesCombined, title: 'Acompanhe seu progresso', text: 'Consulte estatísticas para entender sua evolução.' },
+]
+export default function Landing() {
+  return <div className="public-page landing-page">
+    <header className="public-nav"><Link className="public-brand" to="/inicio"><span className="public-brand-icon"><GraduationCap /></span>Study<span>Flow</span></Link><nav><a href="#sobre">Sobre</a><a href="#recursos">Funcionalidades</a><Link className="nav-login" to="/login">Entrar</Link><Link className="button-primary" to="/cadastro">Criar conta <ArrowRight size={16}/></Link></nav></header>
+    <main>
+      <section className="hero-section" id="sobre"><div className="hero-copy"><span className="hero-kicker"><Sparkles size={14}/> SEU ESPAÇO DE APRENDIZAGEM</span><h1>Organize seus estudos.<br/><em>Transforme seus objetivos</em> em conquistas.</h1><p>O StudyFlow é seu espaço para planejar a rotina acadêmica, organizar tarefas e acompanhar sua evolução. Tudo o que você precisa para estudar com mais foco, em um só lugar.</p><div className="hero-actions"><Link className="button-primary hero-cta" to="/cadastro">Começar agora <ArrowRight size={17}/></Link><Link className="hero-secondary" to="/login">Já tenho uma conta</Link></div><div className="hero-note"><ShieldCheck size={15}/> Seu espaço de estudos, simples e organizado.</div></div><div className="hero-art"><div className="art-orbit orbit-one"/><div className="art-orbit orbit-two"/><div className="study-card"><div className="study-card-top"><span>MEU ESPAÇO</span><span className="live-dot">● Hoje</span></div><h3>Continue avançando!</h3><p>Seu progresso começa com um passo.</p><div className="mock-progress"><span/></div><div className="mock-stats"><div><strong>04</strong><small>Disciplinas</small></div><div><strong>12</strong><small>Tarefas</small></div><div><strong>85%</strong><small>Foco semanal</small></div></div><div className="mock-task"><span className="mock-check">✓</span><div><strong>Revisar conteúdo</strong><small>Matemática · Hoje</small></div><span className="mock-tag">Em dia</span></div><div className="mock-task"><span className="mock-empty"/><div><strong>Preparar atividade</strong><small>História · Amanhã</small></div></div></div><div className="floating-cap"><GraduationCap size={28}/></div></div></section>
+      <section className="features-section" id="recursos"><div className="public-section-heading"><span>FEITO PARA SUA ROTINA</span><h2>Tudo flui melhor quando<br/> seus estudos estão organizados.</h2><p>Ferramentas para ajudar você a manter o ritmo e alcançar suas metas.</p></div><div className="feature-grid">{features.map(({icon:Icon,title,text})=><article className="feature-card" key={title}><span className="feature-icon"><Icon size={22}/></span><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+      <section className="public-bottom-cta"><div><span>VAMOS COMEÇAR?</span><h2>Seu próximo passo começa aqui.</h2><p>Crie sua conta e deixe o StudyFlow ajudar na sua jornada.</p></div><Link className="button-primary" to="/cadastro">Criar minha conta <ArrowRight size={17}/></Link></section>
+    </main><footer className="public-footer">StudyFlow <span>•</span> Organize sua rotina, conquiste seus objetivos.</footer>
+  </div>
+}

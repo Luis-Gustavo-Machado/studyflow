@@ -1,0 +1,12 @@
+import { useState } from 'react'
+import { ArrowLeft, GraduationCap, LogOut, ShieldCheck, Trash2, Users } from 'lucide-react'
+import { Link, Navigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+export default function Admin() {
+  const {user,users,logout,deleteUser}=useAuth()
+  const [query,setQuery]=useState('')
+  if(!user) return <Navigate to="/login" replace/>
+  if(user.role!=='admin') return <Navigate to="/" replace/>
+  const visible=users.filter(item=>`${item.name} ${item.email}`.toLowerCase().includes(query.toLowerCase()))
+  return <div className="admin-page"><header className="admin-top"><Link className="public-brand" to="/inicio"><span className="public-brand-icon"><GraduationCap/></span>Study<span>Flow</span></Link><div><span className="admin-role"><ShieldCheck size={15}/> Administrador</span><button className="admin-logout" onClick={logout}><LogOut size={16}/> Sair</button></div></header><main className="admin-content"><Link to="/inicio" className="admin-back"><ArrowLeft size={15}/> Página inicial</Link><div className="admin-title"><div><span>PAINEL DE CONTROLE</span><h1>Gerenciamento de usuários</h1><p>Visualize e gerencie as contas cadastradas na plataforma.</p></div><div className="admin-count"><Users size={21}/><strong>{users.length}</strong><small>contas cadastradas</small></div></div><section className="admin-table-card"><div className="admin-table-heading"><div><h2>Usuários cadastrados</h2><p>Contas de estudantes criadas no StudyFlow.</p></div><input aria-label="Buscar usuários" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Buscar por nome ou e-mail..."/></div>{visible.length===0?<div className="admin-empty">Nenhum usuário encontrado.</div>:<div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>Nome</th><th>E-mail / usuário</th><th>Tipo de conta</th><th>Ação</th></tr></thead><tbody>{visible.map(item=><tr key={item.id}><td><strong>{item.name}</strong></td><td>{item.email}</td><td><span className="user-role">Estudante</span></td><td><button className="user-delete" onClick={()=>{if(window.confirm(`Deseja realmente excluir a conta de ${item.name}?`))deleteUser(item.id)}} aria-label={`Excluir ${item.name}`}><Trash2 size={16}/> Excluir</button></td></tr>)}</tbody></table></div>}</section><p className="admin-note"><ShieldCheck size={16}/> O painel administrativo é restrito à conta de administrador.</p></main></div>
+}
