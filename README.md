@@ -52,6 +52,9 @@ npm run preview
 - Luis Gustavo
 - Danilo
 - Wagner
+- italo gustavo
+- Lucas martins
+- Wagner Vinícius
 
 > Atualizem este README com os sobrenomes, turma, professor, instituição, prints reais da aplicação e a divisão final dos componentes após alinharem as responsabilidades.
 
