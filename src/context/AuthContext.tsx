@@ -31,8 +31,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = (name: string, email: string, password: string) => {
     if (users.some(item => item.email.toLowerCase() === email.trim().toLowerCase()) || email.trim().toLowerCase() === 'admin')
       return { ok: false, message: 'Este e-mail já está cadastrado.' }
-    const next = [...users, { id: crypto.randomUUID(), name: name.trim(), email: email.trim(), password, role: 'student' as const }]
-    persistUsers(next); return { ok: true }
+    const newUser: StudyUser = { id: crypto.randomUUID(), name: name.trim(), email: email.trim(), password, role: 'student' }
+    persistUsers([...users, newUser])
+    setUser(newUser)
+    localStorage.setItem('studyflow-session', JSON.stringify(newUser))
+    return { ok: true }
   }
   const logout = () => { setUser(null); localStorage.removeItem('studyflow-session') }
   const deleteUser = (id: string) => persistUsers(users.filter(item => item.id !== id))

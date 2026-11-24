@@ -7,6 +7,8 @@ type StudyContextValue = {
   tasks: Task[]
   events: StudyEvent[]
   addSubject: (subject: Subject) => void
+  updateSubject: (subject: Subject) => void
+  deleteSubject: (id: string) => void
   addTask: (task: Task) => void
   toggleTask: (id: string) => void
   deleteTask: (id: string) => void
@@ -38,6 +40,11 @@ export function StudyProvider({ children }: { children: ReactNode }) {
     tasks,
     events,
     addSubject: (subject: Subject) => setSubjects(current => [...current, subject]),
+    updateSubject: (subject: Subject) => setSubjects(current => current.map(item => item.id === subject.id ? subject : item)),
+    deleteSubject: (id: string) => {
+      setSubjects(current => current.filter(item => item.id !== id))
+      setTasks(current => current.filter(task => task.subjectId !== id))
+    },
     addTask: (task: Task) => setTasks(current => [task, ...current]),
     toggleTask: (id: string) => setTasks(current => current.map(task => task.id === id ? { ...task, completed: !task.completed } : task)),
     deleteTask: (id: string) => setTasks(current => current.filter(task => task.id !== id)),
