@@ -55,6 +55,7 @@ npm run preview
 - italo gustavo
 - Lucas martins
 - Wagner Vinícius
+- Victor libre
 
 > Atualizem este README com os sobrenomes, turma, professor, instituição, prints reais da aplicação e a divisão final dos componentes após alinharem as responsabilidades.
 
